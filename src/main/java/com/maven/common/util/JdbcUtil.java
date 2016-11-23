@@ -14,10 +14,10 @@ import com.mysql.jdbc.Statement;
  * @Description 创建JDBC工具类
  */
 public class JdbcUtil {
-	private static String driver;
-	private static String url;
-	private static String username;
-	private static String password;
+	private static String driver = "driver";
+	private static String url = "url";
+	private static String username = "username";
+	private static String password = "password";
 	
 	
 	
