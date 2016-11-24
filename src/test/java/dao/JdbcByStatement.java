@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -68,6 +69,25 @@ public class JdbcByStatement {
 				System.out.println("更新成功!");
 			}
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void query(){
+		try {
+			//获取数据库的链接
+			conn=JdbcUtil.getConnection();
+			//创建发送数据库的结果集
+			st=conn.createStatement();
+			
+			String sql="select * from users where id=1";
+			ResultSet resultSet = st.executeQuery(sql);
+			
+			while(resultSet.next()){
+				System.out.println("age"+resultSet.getObject("age"));
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
