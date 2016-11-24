@@ -10,7 +10,7 @@ import java.util.Properties;
 import com.mysql.jdbc.Statement;
 
 /**
- * @author changwj
+ * @author JIdangb
  * @Description 创建JDBC工具类
  */
 public class JdbcUtil {
@@ -47,7 +47,7 @@ public class JdbcUtil {
 	}
 	/**
 	 * 获取数据库连接对象
-	 * @author changwj
+	 * @author JiDangb
 	 * @return
 	 * @throws SQLException
 	 */
@@ -58,7 +58,7 @@ public class JdbcUtil {
 	
 	 /**
 	  * 释放资源
-	 * @author changwj
+	 * @author JiDangb
 	 * @param conn 数据库连接回话
 	 * @param st 发送sql语句
 	 * @param rs	结果集
