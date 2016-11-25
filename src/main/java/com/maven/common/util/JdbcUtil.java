@@ -5,9 +5,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Properties;
 
-import com.mysql.jdbc.Statement;
+
 
 /**
  * @author JIdangb
@@ -60,10 +61,10 @@ public class JdbcUtil {
 	  * 释放资源
 	 * @author JiDangb
 	 * @param conn 数据库连接回话
-	 * @param st 发送sql语句
+	 * @param ps 发送sql语句
 	 * @param rs	结果集
 	 */
-	public static void release(Connection conn,Statement st,ResultSet rs){
+	public static void release(Connection conn,Statement ps,ResultSet rs){
 		if(rs !=null){
 			try {
 				rs.close();
@@ -71,9 +72,9 @@ public class JdbcUtil {
 				e.printStackTrace();
 			}
 		}
-		if(st !=null){
+		if(ps !=null){
 			try {
-				st.close();
+				ps.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
