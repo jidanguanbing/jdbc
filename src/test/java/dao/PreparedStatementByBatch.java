@@ -24,7 +24,7 @@ public class PreparedStatementByBatch {
 		try {
 			//获取数据库的连接
 			conn=JdbcUtil.getConnection();
-			String sql="insert into users(?,?,?) values(?,?,?)";
+			String sql="insert into users(id,name,age) values(?,?,?)";
 			//数据库的结果集
 			ps=conn.prepareStatement(sql);
 			//执行sql语句
@@ -39,6 +39,24 @@ public class PreparedStatementByBatch {
 				}
 			}
 			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void delete(){
+		
+		try {
+			//获取数据库连接
+			conn=JdbcUtil.getConnection();
+			String sql="delete from users where id>=10";
+			//数据结果集
+			ps=conn.prepareStatement(sql);
+			
+			int num = ps.executeUpdate();
+			if(num>0){
+				System.out.println("删除成功");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
