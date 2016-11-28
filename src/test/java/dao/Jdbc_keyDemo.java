@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.concurrent.SynchronousQueue;
 
 import org.junit.Test;
 
@@ -36,7 +35,7 @@ public class Jdbc_keyDemo {
 				//获取数据库自动获取的主键
 				ResultSet rs = ps.getGeneratedKeys();
 				if(rs.next()){
-					System.out.println("主键"+ rs.getInt(1));
+					System.out.println("主键"+ rs.getInt(0));
 				}
 				
 		
