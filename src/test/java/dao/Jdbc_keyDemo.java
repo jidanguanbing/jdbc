@@ -1,13 +1,13 @@
 package dao;
 
+import com.maven.common.util.JdbcUtil;
+import org.junit.Test;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import org.junit.Test;
-
-import com.maven.common.util.JdbcUtil;
+import java.sql.Statement;
 
 public class Jdbc_keyDemo {
 	Connection conn=null;
@@ -26,7 +26,7 @@ public class Jdbc_keyDemo {
 			String sql="insert into test1(name) value(?)";
 			
 			//数据库的结果集
-			ps=conn.prepareStatement(sql);
+			ps=conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
 			ps.setString(1, "小张");
 			
@@ -35,7 +35,7 @@ public class Jdbc_keyDemo {
 				//获取数据库自动获取的主键
 				ResultSet rs = ps.getGeneratedKeys();
 				if(rs.next()){
-					System.out.println("主键"+ rs.getInt(0));
+					System.out.println("主键"+ rs.getInt(1));
 				}
 				
 		
