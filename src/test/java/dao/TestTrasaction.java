@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Savepoint;
-import java.util.List;
 
 import org.junit.Test;
 
@@ -25,6 +24,7 @@ public class TestTrasaction {
 	Connection conn=null;
 	PreparedStatement ps=null;
 	ResultSet rs=null;
+	Savepoint sp=null;
 	@Test
 	public void trasactionDemo(){
 		try {
@@ -105,6 +105,10 @@ public class TestTrasaction {
 			//执行
 			ps.executeUpdate();
 			
+		
+			
+			
+			
 			
 			//程序中出现异常
 			int num=1/0;
@@ -124,6 +128,55 @@ public class TestTrasaction {
 			}
 			e.printStackTrace();
 		}
+	}
+	/**
+	 * 模拟两个用户之间转账成功
+	 * @author JiDanGb
+	 */
+	@Test
+	public void success(){
+		try {
+			//连接数据库
+			conn=JdbcUtil.getConnection();
+			//开启事务
+			conn.setAutoCommit(false);
+			//创建sql语句
+			String sql="update account set money=money-100 where name='A'";
+			//获得数据库的结果集
+			ps=conn.prepareStatement(sql);
+			
+			ps.executeUpdate();
+			
+			
+			
+			//设置事务的回滚点
+			 sp = conn.setSavepoint();
+	
+			
+			String sql3="update account money=money+100 where name='C'";
+			ps=conn.prepareStatement(sql3);
+			ps.executeUpdate();
+			
+			
+			
+		
+			//程序中出现异常情况
+			int num=1/0;
+			
+			String sql2="update account set money=money+100 where name='B'";
+			
+			ps=conn.prepareStatement(sql2);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			try {
+				conn.rollback(sp);
+				conn.commit();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+		
 	}
 
 
